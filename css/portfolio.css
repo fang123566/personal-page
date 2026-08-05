@@ -1,0 +1,577 @@
+/* ==========================================================================
+   Portfolio Styles - 简历样式
+   ========================================================================== */
+
+/* 字体和基础变量 */
+:root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #12121a;
+    --bg-card: #1a1a24;
+    --text-primary: #ffffff;
+    --text-secondary: #8b8b9e;
+    --text-muted: #5a5a6e;
+    --accent: #6366f1;
+    --accent-glow: rgba(99, 102, 241, 0.3);
+    --accent-secondary: #818cf8;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.15);
+    --radius: 16px;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Sora', sans-serif;
+}
+
+/* 浮动返回顶部按钮 */
+.cv-top {
+    position: fixed;
+    right: 28px;
+    bottom: 28px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border-hover);
+    background: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    z-index: 100;
+}
+
+.cv-top.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cv-top:hover {
+    background: linear-gradient(135deg, #6366f1, #818cf8, #a78bfa);
+    border-color: transparent;
+}
+
+.cv-top svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+/* ========== CV 内容层 ========== */
+.cv-shell {
+    position: relative;
+    z-index: 20;
+    background: #0a0a0f;
+}
+
+/* ========== 滚动渐显动画 ========== */
+.cv-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.cv-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========== CV Section 样式 ========== */
+.cv-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.cv-section:last-child {
+    border-bottom: none;
+}
+
+.cv-section__head {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.cv-section__index {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.cv-section__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.cv-section__title em {
+    color: var(--accent);
+    font-style: normal;
+}
+
+.cv-section__subtitle {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.1em;
+}
+
+/* ========== 关于我 ========== */
+.cv-about {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+@media (max-width: 640px) {
+    .cv-about {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cv-about__avatar img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    object-fit: cover;
+}
+
+.cv-about__name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.cv-about__role {
+    color: var(--accent);
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 16px;
+}
+
+.cv-about__bio {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.cv-about__bio strong {
+    color: var(--text-primary);
+}
+
+.cv-about__highlights {
+    display: flex;
+    gap: 32px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+}
+
+.cv-stat {
+    text-align: center;
+}
+
+.cv-stat__num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.cv-stat__label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* ========== 技能卡片 ========== */
+.cv-skills {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.cv-skill-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.cv-skill-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.cv-skill-card__title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.cv-skill-card__hint {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    margin-bottom: 12px;
+    letter-spacing: 0.1em;
+}
+
+.cv-skill-card__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cv-skill-card__list li {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+/* ========== 时间线 ========== */
+.cv-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.cv-timeline__item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    border-left: 3px solid var(--accent);
+}
+
+.cv-timeline__period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-bottom: 8px;
+}
+
+.cv-timeline__title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.cv-timeline__org {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.cv-timeline__points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.cv-timeline__points li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 6px;
+    padding-left: 16px;
+    position: relative;
+}
+
+.cv-timeline__points li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.cv-timeline__points li strong {
+    color: var(--text-primary);
+}
+
+/* ========== 项目卡片 ========== */
+.cv-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    justify-content: center;
+}
+
+.cv-tab {
+    padding: 8px 20px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 50px;
+    color: var(--text-secondary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cv-tab:hover,
+.cv-tab.is-active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.cv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.cv-project {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.cv-project:hover {
+    border-color: var(--accent);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.cv-project.is-hidden {
+    display: none;
+}
+
+.cv-project__cover {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+}
+
+.cv-project__cover svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.cv-project__badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+}
+
+.cv-project__category {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #000;
+}
+
+.cv-project__body {
+    padding: 16px;
+}
+
+.cv-project__title {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.cv-project__sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.cv-project__desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.cv-project__desc strong {
+    color: var(--text-primary);
+}
+
+.cv-project__meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 10px;
+    font-size: 0.75rem;
+}
+
+.cv-project__meta span {
+    color: var(--text-muted);
+}
+
+.cv-project__meta strong {
+    color: var(--text-secondary);
+}
+
+.cv-project__stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.cv-project__stack span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-muted);
+}
+
+.cv-project__link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.cv-project__link:hover {
+    color: var(--accent-secondary);
+    gap: 10px;
+}
+
+/* ========== 荣誉 ========== */
+.cv-honors {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.cv-honor {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.cv-honor:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.cv-honor__icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+}
+
+.cv-honor__title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.cv-honor__desc {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* ========== 联系 ========== */
+.cv-contact {
+    text-align: center;
+}
+
+.cv-contact__big {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.cv-contact__big em {
+    color: var(--accent);
+    font-style: normal;
+}
+
+.cv-contact__hint {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 32px;
+}
+
+.cv-contact__links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cv-contact__btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background: var(--accent);
+    border-radius: 50px;
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.cv-contact__btn:hover {
+    background: var(--accent-secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px var(--accent-glow);
+}
+
+.cv-footer {
+    text-align: center;
+    padding-top: 60px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    :root {
+        --radius: 12px;
+    }
+}

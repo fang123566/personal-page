@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智能建造博览会 · 页面原型展示</title>
+<style>
+:root {
+  --ink: #17212b;
+  --muted: #667085;
+  --line: #e4e7ec;
+  --canvas: #f4f6f8;
+  --surface: #ffffff;
+  --blue: #246bfd;
+  --blue-weak: #eef4ff;
+  --neutral-700: #374151;
+  --neutral-400: #9ca3af;
+  --neutral-200: #e5e7eb;
+  --neutral-100: #f3f4f6;
+  --neutral-50: #f9fafb;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  color: var(--ink); background: var(--canvas); font-size: 14px; letter-spacing: 0;
+}
+button, input, textarea, select { font: inherit; letter-spacing: 0; }
+button { cursor: pointer; }
+
+/* 页面展示容器 */
+.pages-container {
+  padding: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: flex-start;
+}
+.page-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.08);
+}
+.page-section h2 {
+  margin: 0 0 16px;
+  font-size: 16px;
+  color: var(--ink);
+  border-bottom: 2px solid var(--blue);
+  padding-bottom: 8px;
+}
+.page-section h3 {
+  margin: 20px 0 12px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* 手机外框 */
+.phone-shell {
+  width: 390px;
+  min-width: 390px;
+  height: 844px;
+  background: #111820;
+  border: 8px solid #111820;
+  border-radius: 34px;
+  box-shadow: 0 18px 45px rgba(16,24,40,.18);
+  overflow: hidden;
+}
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 25px;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 27px 52px 1fr;
+}
+.phone-status {
+  padding: 7px 17px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 700;
+}
+.phone-status span:last-child { letter-spacing: 1px; }
+.mobile-head {
+  border-bottom: 1px solid #edf0f2;
+  display: grid;
+  grid-template-columns: 44px 1fr 44px;
+  align-items: center;
+  padding: 0 10px;
+}
+.mobile-head strong { text-align: center; font-size: 16px; }
+.mobile-head button { border: 0; background: transparent; font-size: 23px; color: #344054; height: 40px; }
+.mobile-page { overflow-y: auto; background: #f7f8fa; }
+.mobile-page::-webkit-scrollbar { width: 0; }
+
+/* 主入口布局 */
+.trip-main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.trip-form {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.trip-form .form-sections {
+  padding: 8px 14px 16px;
+}
+.trip-header { background: white; }
+
+/* 顶部搜索条 */
+.search-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: white;
+  border-bottom: 1px solid var(--line);
+}
+.search-strip input {
+  flex: 1;
+  padding: 9px 12px;
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--ink);
+  background: #f7f8fa;
+  outline: none;
+}
+.search-go-btn {
+  padding: 9px 16px;
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.page-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  background: var(--blue-weak);
+  border-bottom: 1px solid var(--blue);
+  gap: 8px;
+}
+
+/* 底部微信输入栏 */
+.bottom-bar {
+  flex-shrink: 0;
+  background: white;
+  border-top: 1px solid var(--line);
+  padding: 8px 12px;
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  box-shadow: 0 -2px 12px rgba(0,0,0,.06);
+}
+.wx-composer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+}
+.wx-composer .wx-icon-btn {
+  width: 34px; height: 34px; flex: 0 0 34px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: white; border: 1px solid #e5e5e5; border-radius: 6px;
+  font-size: 16px; color: #555; cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.wx-composer .wx-icon-btn.on { background: var(--blue-weak); color: var(--blue); border-color: var(--blue); }
+.wx-composer .wx-hold-mic {
+  flex: 1; min-width: 0; height: 34px;
+  background: white; border: 1px solid #e5e5e5; border-radius: 6px;
+  font-size: 13px; color: #555; cursor: pointer; user-select: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+.wx-composer .wx-hold-mic.recording {
+  background: var(--blue-weak); color: var(--blue); border-color: var(--blue);
+  animation: wxPulse 1.2s ease-in-out infinite;
+}
+@keyframes wxPulse { 0%,100%{opacity:1} 50%{opacity:.65} }
+.wx-composer .wx-send-btn {
+  height: 34px; padding: 0 12px;
+  background: var(--blue); color: white; border: 0; border-radius: 6px;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.wx-composer .wx-hold-btn {
+  flex: 1; min-width: 0; height: 34px;
+  background: white; border: 1px solid #e5e5e5; border-radius: 6px;
+  font-size: 13px; color: #555; cursor: pointer; user-select: none;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+.wx-composer .wx-hold-btn.recording {
+  background: var(--blue-weak); color: var(--blue); border-color: var(--blue);
+  animation: wxPulse 1.2s ease-in-out infinite;
+}
+.wx-composer .wx-hold-btn.text-btn { color: var(--blue); border-color: var(--blue); background: var(--blue-weak); }
+
+/* Hero区域 */
+.hero-strip { background: #173f5f; color: white; padding: 22px 20px 25px; }
+.hero-strip .eyebrow { color: #b9d7e9; font-size: 11px; margin-bottom: 8px; }
+.hero-strip h2 { font-size: 22px; margin: 0 0 8px; }
+.hero-strip p { color: #d7e6ee; font-size: 12px; line-height: 1.65; margin: 0; }
+
+/* 登录页 */
+.login-content { padding: 27px 20px; background: white; min-height: 100%; }
+.login-title h2 { font-size: 21px; margin: 0 0 8px; }
+.login-title p { margin: 0 0 25px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.field { margin-bottom: 15px; }
+.field label { display: flex; align-items: center; gap: 5px; margin-bottom: 7px; color: #344054; font-size: 12px; font-weight: 650; }
+.required { color: var(--blue); }
+.field input, .field textarea, .field select {
+  width: 100%; border: 1px solid #d0d5dd; background: white; color: var(--ink); border-radius: 6px;
+  padding: 10px 11px; min-height: 42px; outline: none;
+}
+.input-combo { display: flex; }
+.input-combo input { border-radius: 6px 0 0 6px; }
+.input-combo button { min-width: 105px; border: 1px solid #d0d5dd; border-left: 0; border-radius: 0 6px 6px 0; background: #f9fafb; color: var(--blue); }
+.primary, .secondary, .danger-btn, .success-btn {
+  border: 0; min-height: 44px; padding: 0 16px; border-radius: 6px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+}
+.primary { color: white; background: var(--blue); }
+.secondary { color: #344054; background: white; border: 1px solid #d0d5dd; }
+.danger-btn { color: white; background: var(--ink); }
+.success-btn { color: white; background: var(--blue); }
+.block { width: 100%; }
+.button-row { display: flex; gap: 10px; }
+.button-row > * { flex: 1; }
+.helper { color: var(--muted); font-size: 11px; line-height: 1.55; }
+.notice { border: 1px solid var(--line); background: var(--neutral-50); color: var(--neutral-700); border-radius: 6px; padding: 11px 12px; font-size: 11px; line-height: 1.55; }
+.notice.info { background: var(--blue-weak); border-color: var(--blue); color: var(--ink); }
+
+/* 表单样式 */
+.fs-section {
+  background: white; border-radius: 8px; border: 1px solid var(--line);
+  margin-bottom: 12px; padding: 14px 14px 4px;
+  overflow: visible;
+}
+.fs-section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px dashed var(--line);
+}
+.fs-section-head strong { font-size: 13px; font-weight: 700; }
+.fs-section-head small { color: var(--muted); font-size: 10px; }
+.fs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.fs-grid.single { grid-template-columns: 1fr; }
+.fs-field { display: block; }
+.fs-field label {
+  display: flex; align-items: center; gap: 4px; margin-bottom: 6px;
+  color: #344054; font-size: 11px; font-weight: 600;
+}
+.fs-field input, .fs-field textarea, .fs-field select {
+  width: 100%; border: 1px solid #d0d5dd; background: white; color: var(--ink);
+  border-radius: 6px; padding: 9px 10px; min-height: 36px; font-size: 12px; outline: none;
+}
+.fs-field textarea { min-height: 86px; resize: none; line-height: 1.55; }
+.fs-tip { color: var(--muted); font-size: 10px; line-height: 1.55; margin-top: 6px; }
+.fs-actions {
+  display: flex; gap: 10px; padding: 14px 16px;
+  background: rgba(255,255,255,.97); border-top: 1px solid var(--line);
+  position: sticky; bottom: 0;
+}
+.fs-actions .primary { flex: 2; }
+.fs-actions .secondary { flex: 1; }
+
+/* 折叠分区 */
+.fs-section.collapsible .fs-section-head {
+  cursor: pointer; user-select: none;
+  border-bottom: 1px dashed var(--line);
+}
+.fs-section.collapsible .fs-section-head::after {
+  content: '▾'; font-size: 14px; color: var(--muted);
+  transition: transform .25s ease;
+  margin-left: 6px;
+}
+.fs-section.collapsible.collapsed .fs-section-head::after {
+  content: '▸';
+}
+.fs-section.collapsible .fs-section-body {
+  overflow: hidden;
+  max-height: 4000px;
+  transition: max-height .3s ease, opacity .25s ease, margin .25s ease, padding .25s ease;
+  opacity: 1;
+}
+.fs-section.collapsible.collapsed .fs-section-body {
+  max-height: 0; opacity: 0; margin: 0; padding: 0;
+  pointer-events: none;
+}
+.fs-form-stack .fs-grid {
+  grid-template-columns: 1fr;
+}
+
+/* 确认卡片 */
+.review-item {
+  display: grid;
+  grid-template-columns: 78px 1fr 18px;
+  align-items: center;
+  min-height: 39px;
+  border-bottom: 1px solid #f0f1f3;
+  font-size: 12px;
+}
+.review-item:last-child { border-bottom: 0; }
+.review-item span:first-child { color: var(--muted); }
+.review-item strong { font-weight: 650; }
+
+/* 成功状态 */
+.success-state {
+  min-height: 100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px;
+}
+.success-symbol {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--neutral-100);
+  color: var(--ink);
+  font-size: 34px;
+  font-weight: 800;
+}
+.success-symbol.danger { background: var(--neutral-100); color: var(--muted); }
+.success-state h2 { margin: 20px 0 8px; font-size: 21px; }
+.success-state p { margin: 0 0 25px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.record-slip {
+  width: 100%;
+  background: #f7f8fa;
+  border: 1px solid var(--line);
+  text-align: left;
+  padding: 13px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  font-size: 11px;
+  line-height: 1.9;
+  color: #475467;
+}
+
+/* 车牌拍照 */
+.plate-camera {
+  margin: 14px 16px;
+  height: 290px;
+  background: #202a33;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  position: relative;
+  overflow: hidden;
+}
+.scan-frame {
+  width: 270px;
+  height: 92px;
+  border: 2px solid #7dd3fc;
+  position: relative;
+}
+.scan-frame::before, .scan-frame::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  height: 1px;
+  background: #7dd3fc;
+}
+.scan-frame::before { top: 30px; }
+.scan-frame::after { bottom: 30px; }
+.plate-camera p { font-size: 11px; color: #cbd5e1; margin-top: 18px; }
+.shutter {
+  width: 66px;
+  height: 66px;
+  border: 6px solid white;
+  background: transparent;
+  border-radius: 50%;
+  margin-top: 26px;
+}
+
+/* 车牌展示 */
+.plate {
+  background: #1464c0;
+  color: white;
+  border: 3px solid white;
+  box-shadow: 0 0 0 2px #1464c0;
+  padding: 10px 16px;
+  font-size: 26px;
+  font-weight: 800;
+  text-align: center;
+  border-radius: 5px;
+  letter-spacing: 4px;
+}
+.result-hero { text-align: center; padding: 24px 16px 18px; background: white; }
+.result-hero h2 { margin: 17px 0 6px; font-size: 20px; }
+.result-hero p { margin: 0; color: var(--muted); font-size: 11px; }
+.vip-banner {
+  background: #fff8e7;
+  border: 1px solid #fdb022;
+  color: #7a2e0e;
+  padding: 12px;
+  text-align: center;
+  font-weight: 800;
+  margin: 14px 16px 0;
+  border-radius: 6px;
+}
+
+/* 嘉宾身份信息 */
+.identity { background: white; padding: 15px 16px; margin-top: 10px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.identity-main { display: flex; align-items: center; gap: 12px; }
+.identity-main .avatar { width: 44px; height: 44px; background: #fff1cf; color: #93370d; }
+.identity-main h3 { margin: 0 0 4px; }
+.identity-main p { margin: 0; color: var(--muted); font-size: 11px; }
+.kv-grid { display: grid; grid-template-columns: 1fr 1fr; margin-top: 14px; border-top: 1px solid var(--line); }
+.kv-grid div { padding: 11px 0 0; }
+.kv-grid small { display: block; color: var(--muted); font-size: 10px; margin-bottom: 4px; }
+.kv-grid strong { font-size: 12px; }
+
+/* 出行方式切换 */
+.travel-mode-toggle {
+  display: flex;
+  gap: 8px;
+}
+.travel-mode-toggle span {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1.5px solid var(--line);
+  font-size: 13px;
+  cursor: pointer;
+}
+.travel-mode-toggle span.on {
+  background: var(--blue-weak);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+/* 接站切换 */
+.pickup-toggle {
+  display: flex;
+  gap: 8px;
+}
+.pickup-toggle span {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1.5px solid var(--line);
+  font-size: 13px;
+  cursor: pointer;
+}
+.pickup-toggle span.on {
+  background: var(--blue-weak);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+/* 页面标题样式 */
+.page-title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background: var(--blue-weak);
+  border-bottom: 1px solid var(--blue);
+}
+.topbar-btn {
+  border: 0;
+  background: transparent;
+  color: var(--blue);
+  font-size: 12px;
+  padding: 4px 8px;
+}
+</style>
+</head>
+<body>
+
+<div class="pages-container">
+
+  <!-- ==================== 会务行程填报流程 ==================== -->
+  <div class="page-section">
+    <h2>会务行程填报 · 登录页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>会务工作台</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="hero-strip">
+            <div class="eyebrow">2026 INTELLIGENT CONSTRUCTION EXPO</div>
+            <h2>嘉宾行程协同</h2>
+            <p>授权会务人员登录后，可代嘉宾录入和更新住宿、交通及接站信息。</p>
+          </div>
+          <div class="login-content">
+            <div class="login-title">
+              <h2>账号登录</h2>
+              <p>使用管理员分配的会务账号验证身份</p>
+            </div>
+            <div class="field">
+              <label><span class="required">*</span> 手机号码</label>
+              <input value="138 0013 8000" inputmode="tel">
+            </div>
+            <div class="field">
+              <label><span class="required">*</span> 验证码</label>
+              <div class="input-combo">
+                <input value="862914" inputmode="numeric">
+                <button>获取验证码</button>
+              </div>
+            </div>
+            <button class="primary block">验证并进入</button>
+            <p class="helper" style="text-align:center;margin-top:14px;">登录即表示同意遵守嘉宾信息保密要求</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>会务行程填报 · 主入口页（未选人）</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>行程填报</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="trip-main">
+            <div class="trip-header">
+              <div class="search-strip">
+                <input placeholder="搜索姓名 / 手机号 / 单位…">
+                <button class="search-go-btn">搜索</button>
+              </div>
+              <div class="page-topbar">
+                <span style="font-size:11px;color:var(--muted);">新增嘉宾 · 提交后写入名单</span>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <strong style="font-size:15px;">新增嘉宾</strong>
+                </div>
+              </div>
+            </div>
+            <div class="trip-form">
+              <div class="form-sections">
+                <div class="fs-section collapsible">
+                  <div class="fs-section-head"><strong>嘉宾信息</strong><small>姓名 / 单位 / 职务</small></div>
+                  <div class="fs-section-body">
+                    <div class="fs-field"><label><span class="required">*</span> 姓名</label><input placeholder="请输入姓名"></div>
+                    <div class="fs-field"><label>手机号</label><input inputmode="tel" placeholder="请输入手机号"></div>
+                    <div class="fs-field"><label><span class="required">*</span> 单位名称</label><input placeholder="如：中建一局"></div>
+                    <div class="fs-field"><label><span class="required">*</span> 职务</label><input placeholder="如：董事长、总经理"></div>
+                    <div class="fs-field"><label><span class="required">*</span> 类别</label><select style="width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:14px;background:white;"><option>请选择类别</option><option>政府领导</option><option>央企高管</option><option>院士专家</option><option>VIP嘉宾</option></select></div>
+                  </div>
+                </div>
+                <div class="fs-section collapsible">
+                  <div class="fs-section-head"><strong>接待人员信息</strong><small>保障单位 · 一对一人员</small></div>
+                  <div class="fs-section-body">
+                    <div class="fs-field"><label><span class="required">*</span> 保障单位 / 部门</label><select style="width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:14px;background:white;"><option>请选择保障单位/部门</option><option>办公室</option><option>数产部</option><option>一公司</option></select></div>
+                    <div class="fs-field"><label><span class="required">*</span> 一对一保障人员</label><select style="width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:14px;background:white;"><option>请选择一对一保障人员</option><option>王明 · 13901236621</option></select></div>
+                  </div>
+                </div>
+                <div class="fs-section collapsible">
+                  <div class="fs-section-head"><strong>行程信息</strong><small>交通 · 住宿 · 接站</small></div>
+                  <div class="fs-section-body">
+                    <div class="fs-field"><label>出发城市</label><input value="上海"></div>
+                    <div class="fs-field"><label><span class="required">*</span> 出行方式</label>
+                      <div class="travel-mode-toggle"><span class="on">高铁</span><span>航班</span><span>自驾</span></div>
+                    </div>
+                    <div class="fs-field" id="f-train"><label>车次</label><input placeholder="如 G12"></div>
+                    <div class="fs-field"><label>抵达时间</label><input value="10月8日 14:00"></div>
+                    <div class="fs-field"><label>需要接站</label>
+                      <div class="pickup-toggle"><span class="on">是</span><span>否</span></div>
+                    </div>
+                    <div class="fs-field"><label>接站站点</label><select style="width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:14px;background:white;"><option>北京南站</option><option>北京站</option><option>大兴机场</option></select></div>
+                    <div class="fs-field"><label>随行人数</label><input value="2 人"></div>
+                    <div class="fs-field"><label>协助订房</label><div><span style="display:inline-block;padding:6px 14px;border-radius:6px;border:1.5px solid var(--line);font-size:13px;cursor:pointer;">是</span><span style="display:inline-block;padding:6px 14px;border-radius:6px;border:1.5px solid var(--line);font-size:13px;cursor:pointer;margin-left:8px;">否</span></div></div>
+                    <div class="fs-field"><label>入住晚数</label><input value="2 晚"></div>
+                    <div class="fs-field"><label>意向酒店</label><input value="国家会议中心大酒店"></div>
+                  </div>
+                </div>
+                <div class="fs-actions">
+                  <button class="primary block">确认并同步</button>
+                </div>
+              </div>
+            </div>
+            <div class="bottom-bar">
+              <div class="wx-composer">
+                <button class="wx-icon-btn on" title="语音模式">🎤</button>
+                <button class="wx-icon-btn" title="文字模式">⌨️</button>
+                <button class="wx-hold-btn">🎤 按住说话</button>
+                <button class="wx-send-btn" disabled>解析</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>会务行程填报 · 主入口页（已选人）</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>行程填报</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="trip-main">
+            <div class="trip-header">
+              <div class="search-strip">
+                <input value="王建国" placeholder="搜索姓名 / 手机号 / 单位…">
+                <button class="search-go-btn">搜索</button>
+              </div>
+              <div class="page-topbar">
+                <span style="font-size:11px;color:var(--muted);">更新行程</span>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <strong style="font-size:15px;">王建国</strong>
+                  <span style="font-size:11px;font-weight:400;color:var(--blue);background:var(--blue-weak);padding:2px 8px;border-radius:4px;margin-left:8px;">总工程师</span>
+                  <button class="topbar-btn">改选</button>
+                </div>
+              </div>
+            </div>
+            <div class="trip-form">
+              <div class="form-sections">
+                <div class="fs-section collapsible">
+                  <div class="fs-section-head"><strong>嘉宾信息</strong><small>姓名 / 单位 / 职务</small></div>
+                  <div class="fs-section-body">
+                    <div class="fs-field"><label><span class="required">*</span> 姓名</label><input value="王建国"></div>
+                    <div class="fs-field"><label>手机号</label><input value="13912345678" inputmode="tel"></div>
+                    <div class="fs-field"><label><span class="required">*</span> 单位名称</label><input value="中建一局"></div>
+                    <div class="fs-field"><label><span class="required">*</span> 职务</label><input value="总工程师"></div>
+                    <div class="fs-field"><label><span class="required">*</span> 类别</label><select style="width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:14px;background:white;"><option>VIP嘉宾</option></select></div>
+                  </div>
+                </div>
+                <div class="fs-section collapsible">
+                  <div class="fs-section-head"><strong>接待人员信息</strong><small>保障单位 · 一对一人员</small></div>
+                  <div class="fs-section-body">
+                    <div class="fs-field"><label><span class="required">*</span> 保障单位 / 部门</label><select style="width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:14px;background:white;"><option>山东公司</option></select></div>
+                    <div class="fs-field"><label><span class="required">*</span> 一对一保障人员</label><select style="width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:14px;background:white;"><option>罗斌 · 13901236636 · 山东公司经理</option></select></div>
+                  </div>
+                </div>
+                <div class="fs-section collapsible">
+                  <div class="fs-section-head"><strong>行程信息</strong><small>交通 · 住宿 · 接站</small></div>
+                  <div class="fs-section-body">
+                    <div class="fs-field"><label>出发城市</label><input value="上海"></div>
+                    <div class="fs-field"><label><span class="required">*</span> 出行方式</label>
+                      <div class="travel-mode-toggle"><span>高铁</span><span>航班</span><span class="on">自驾</span></div>
+                    </div>
+                    <div class="fs-field" id="f-plate" style="display:none;"><label>车牌号</label><input value="京A8888W" placeholder="请输入车牌号" style="text-transform:uppercase;"></div>
+                    <div class="fs-field"><label>抵达时间</label><input value="10月8日 14:00"></div>
+                    <div class="fs-field"><label>需要接站</label>
+                      <div class="pickup-toggle"><span class="on">是</span><span>否</span></div>
+                    </div>
+                    <div class="fs-field"><label>接站站点</label><select style="width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:8px;font-size:14px;background:white;"><option>北京南站</option></select></div>
+                    <div class="fs-field"><label>随行人数</label><input value="2 人"></div>
+                    <div class="fs-field"><label>协助订房</label><div><span style="display:inline-block;padding:6px 14px;border-radius:6px;border:1.5px solid var(--line);font-size:13px;cursor:pointer;">是</span><span style="display:inline-block;padding:6px 14px;border-radius:6px;border:1.5px solid var(--line);font-size:13px;cursor:pointer;margin-left:8px;">否</span></div></div>
+                    <div class="fs-field"><label>入住晚数</label><input value="2 晚"></div>
+                    <div class="fs-field"><label>意向酒店</label><input value="国家会议中心大酒店"></div>
+                  </div>
+                </div>
+                <div class="fs-actions">
+                  <button class="primary block">确认并同步</button>
+                </div>
+              </div>
+            </div>
+            <div class="bottom-bar">
+              <div class="wx-composer">
+                <button class="wx-icon-btn" title="语音模式">🎤</button>
+                <button class="wx-icon-btn on" title="文字模式">⌨️</button>
+                <button class="wx-hold-btn text-btn">✏️ 输入文字</button>
+                <button class="wx-send-btn">解析</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>会务行程填报 · 确认页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>确认行程</strong><span></span></div>
+        <div class="mobile-page">
+          <div style="padding:16px 14px;">
+            <div class="notice info" style="margin-bottom:16px;">
+              <strong>请核对以下嘉宾信息</strong>，确认无误后点击「确认提交」，如需修改点击「返回修改」
+            </div>
+            <div class="fs-section">
+              <div class="fs-section-head"><strong>嘉宾信息</strong></div>
+              <div class="review-item"><span>姓名</span><strong>王建国</strong></div>
+              <div class="review-item"><span>手机号</span><strong>13912345678</strong></div>
+              <div class="review-item"><span>单位</span><strong>中建一局</strong></div>
+              <div class="review-item"><span>职务</span><strong>总工程师</strong></div>
+              <div class="review-item"><span>类别</span><strong>VIP嘉宾</strong></div>
+            </div>
+            <div class="fs-section" style="margin-top:12px;">
+              <div class="fs-section-head"><strong>接待人员信息</strong></div>
+              <div class="review-item"><span>保障单位/部门</span><strong>山东公司</strong></div>
+              <div class="review-item"><span>一对一保障人员</span><strong>罗斌 · 13901236636 · 山东公司经理</strong></div>
+            </div>
+            <div class="fs-section" style="margin-top:12px;">
+              <div class="fs-section-head"><strong>行程信息</strong></div>
+              <div class="review-item"><span>出发城市</span><strong>上海</strong></div>
+              <div class="review-item"><span>出行方式</span><strong>自驾</strong></div>
+              <div class="review-item"><span>车牌号</span><strong>京A8888W</strong></div>
+              <div class="review-item"><span>抵达时间</span><strong>10月8日 14:00</strong></div>
+              <div class="review-item"><span>需要接站</span><strong>是</strong></div>
+              <div class="review-item"><span>接站站点</span><strong>北京南站 · 同行2人</strong></div>
+              <div class="review-item"><span>协助订房</span><strong>是</strong></div>
+              <div class="review-item"><span>入住晚数</span><strong>2晚</strong></div>
+              <div class="review-item"><span>意向酒店</span><strong>国家会议中心大酒店</strong></div>
+            </div>
+          </div>
+          <div class="fs-actions">
+            <button class="secondary">返回修改</button>
+            <button class="primary">确认提交</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>会务行程填报 · 提交成功页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>提交结果</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="success-state">
+            <div class="success-symbol">✓</div>
+            <h2>行程已更新</h2>
+            <p>王建国<br>总工程师<br>最新行程已写入在线表格<br>同步时间 2026-07-23 09:41:26</p>
+            <div class="record-slip">
+              <strong>本次更新</strong><br>
+              姓名：王建国<br>
+              职务：总工程师<br>
+              交通：自驾 · 车牌号:京A8888W · 10月8日 14:00 抵达<br>
+              住宿：国家会议中心大酒店 · 2晚<br>
+              接站：需要 · 北京南站 · 同行2人
+            </div>
+            <button class="primary block">继续填报下一位</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 车辆放行流程 ==================== -->
+  <div class="page-section">
+    <h2>车辆放行 · 登录页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>车辆放行</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="hero-strip" style="background:#263238">
+            <div class="eyebrow">VIP 车辆核验</div>
+            <h2>会务人员 · 车辆放行</h2>
+            <p>使用同一会务账号登录后拍摄车牌，系统识别并匹配在线白名单，放行或拒绝操作写入通行台账。</p>
+          </div>
+          <div class="login-content">
+            <div class="login-title">
+              <h2>账号登录</h2>
+              <p>使用管理员分配的会务账号验证身份后即可核验车辆</p>
+            </div>
+            <div class="field">
+              <label><span class="required">*</span> 手机号码</label>
+              <input value="136 0108 6621">
+            </div>
+            <div class="field">
+              <label><span class="required">*</span> 密码或验证码</label>
+              <input type="password" value="123456">
+            </div>
+            <button class="primary block">验证并进入</button>
+            <div class="notice" style="margin-top:15px;">所有拍照、查询、放行及拒绝操作均留存操作人和时间。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>车辆放行 · 拍摄车牌页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>拍摄车牌</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="plate-camera">
+            <div class="scan-frame"></div>
+            <p>将车牌完整置于框内，保持手机稳定</p>
+            <button class="shutter"></button>
+          </div>
+          <div style="padding-top:3px;padding:0 16px 16px;">
+            <button class="secondary block" style="margin-top:12px;">▧ 从相册选择</button>
+            <p class="helper" style="text-align:center;margin:12px 0 0;">支持蓝牌、绿牌、黄牌 · 识别失败可重新拍摄或手动录入</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>车辆放行 · 车牌识别成功页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>车牌识别结果</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="result-hero">
+            <div class="plate">京A·8888W</div>
+            <h2>车牌识别成功</h2>
+            <p>OCR 置信度 98.6% · 请核对号码后查询 VIP 白名单</p>
+          </div>
+          <div style="padding:0 16px 16px;">
+            <div class="field">
+              <label>识别车牌</label>
+              <input value="京A8888W" style="text-align:center;font-size:18px;font-weight:800;letter-spacing:2px;">
+            </div>
+            <div class="notice info">下一步将在 VIP 车辆白名单中查找该车牌，确认车辆类型与关联嘉宾。</div>
+            <button class="primary block" style="margin-top:16px;">确认车牌并查询</button>
+            <button class="secondary block" style="margin-top:9px;">重新拍摄</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>车辆放行 · 车牌识别失败页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>车牌识别</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="success-state" style="justify-content:flex-start;padding-top:55px;">
+            <div class="success-symbol danger">!</div>
+            <h2>车牌识别失败</h2>
+            <p>照片可能存在反光、遮挡或角度偏斜<br>请重新拍摄或手动输入车牌</p>
+            <button class="primary block">重新拍摄</button>
+            <button class="secondary block" style="margin-top:10px;">手动录入车牌</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>车辆放行 · 手动录入车牌页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>手动录入车牌</strong><span></span></div>
+        <div class="mobile-page">
+          <div style="padding:16px;">
+            <div class="notice">OCR 识别失败时使用手工录入兜底，提交前请与实车再次核对。</div>
+            <div class="field" style="margin-top:20px;">
+              <label><span class="required">*</span> 车牌号码</label>
+              <input value="京A8888W" style="text-align:center;font-size:20px;font-weight:800;text-transform:uppercase;">
+            </div>
+            <button class="primary block" style="margin-top:16px;">查询 VIP 白名单</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>车辆放行 · VIP白名单匹配页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>VIP 车辆匹配</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="vip-banner">✓ VIP 白名单已匹配 · 行程信息已同步</div>
+          <div class="result-hero" style="padding-bottom:13px;">
+            <div class="plate">京A·8888W</div>
+            <h2 style="font-size:16px;">车牌信息一致 · 可放行</h2>
+          </div>
+          <div style="padding:0 14px;">
+            <div class="fs-section">
+              <div class="fs-section-head"><strong>嘉宾信息</strong></div>
+              <div class="review-item"><span>姓名</span><strong>王建国</strong></div>
+              <div class="review-item"><span>手机号</span><strong>139****5678</strong></div>
+              <div class="review-item"><span>单位</span><strong>中建一局</strong></div>
+              <div class="review-item"><span>职务</span><strong>总工程师</strong></div>
+            </div>
+            <div class="fs-section" style="margin-top:12px;">
+              <div class="fs-section-head"><strong>行程信息</strong></div>
+              <div class="review-item"><span>出发城市</span><strong>上海</strong></div>
+              <div class="review-item"><span>出行方式</span><strong>自驾</strong></div>
+              <div class="review-item"><span>车牌号</span><strong>京A8888W</strong></div>
+              <div class="review-item"><span>抵达时间</span><strong>10月8日 14:00</strong></div>
+              <div class="review-item"><span>需要接站</span><strong>是</strong></div>
+              <div class="review-item"><span>接站站点</span><strong>北京南站 · 同行2人</strong></div>
+              <div class="review-item"><span>协助订房</span><strong>是</strong></div>
+              <div class="review-item"><span>入住晚数</span><strong>2晚</strong></div>
+              <div class="review-item"><span>意向酒店</span><strong>国家会议中心大酒店</strong></div>
+            </div>
+          </div>
+          <div style="padding:0 16px 16px;">
+            <button class="success-btn block">确认放行</button>
+            <button class="secondary block" style="margin-top:9px;">拒绝入场</button>
+            <p class="helper" style="text-align:center;margin-top:11px;">放行后将写入通行台账，并标记关联行程为「已入场」</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>车辆放行 · 普通车辆拒绝页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>普通车辆</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="result-hero">
+            <div class="plate">京A·8888W</div>
+            <h2>未匹配 VIP 白名单</h2>
+            <p>该车牌未在 VIP 车辆白名单中 · 按规定拒绝入场</p>
+          </div>
+          <div style="padding:0 16px 16px;">
+            <div class="notice">根据当前车辆放行业务流程，非 VIP 车辆不可进入。拒绝操作将写入通行台账留痕。</div>
+            <div class="field" style="margin-top:16px;">
+              <label>拒绝原因</label>
+              <select style="width:100%;padding:10px 12px;border:1px solid #d0d5dd;border-radius:6px;font-size:12px;background:white;">
+                <option>非 VIP 白名单车辆</option>
+                <option>车牌与预约信息不符</option>
+                <option>其他</option>
+              </select>
+            </div>
+            <button class="danger-btn block">确认拒绝入场</button>
+            <button class="secondary block" style="margin-top:9px;">返回核对车牌</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>车辆放行 · 重复入场页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>重复入场</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="result-hero">
+            <div class="plate">京A·8888W</div>
+            <h2 style="color:#c4320a;">车牌已入场</h2>
+            <p>该车辆已于 09:12 放行 · 属重复入场</p>
+          </div>
+          <div style="padding:0 16px 16px;">
+            <div class="notice">为防止重复放行，该车牌已存在通行记录。请核对是否同车再次到达，必要时联系安保主管。</div>
+            <div class="button-row" style="margin-top:14px;">
+              <button class="secondary">继续拍摄</button>
+              <button class="primary">继续放行</button>
+              <button class="danger-btn">确认拒绝</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>车辆放行 · 放行成功页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>车辆放行成功</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="success-state">
+            <div class="success-symbol">✓</div>
+            <h2>车辆已放行</h2>
+            <p>道闸放行指令已确认，通行记录已写入台账<br>关联嘉宾行程已标记为「已入场」</p>
+            <div class="record-slip">
+              <strong>通行台账 #G202607230086</strong><br>
+              车牌：京A8888W · VIP 车辆<br>
+              时间：2026-07-23 09:41:26<br>
+              操作人：王强（会务人员）<br>
+              —— 关联嘉宾信息 ——<br>
+              姓名：王建国<br>
+              职务：总工程师<br>
+              单位：中建一局<br>
+              电话：139****5678<br>
+              —— 行程信息 ——<br>
+              交通：自驾 · 车牌号 京A8888W<br>
+              出发城市：上海<br>
+              抵达时间：10月8日 14:00<br>
+              住宿：国家会议中心大酒店 · 2晚<br>
+              接站：北京南站 · 同行2人<br>
+              状态：已放行 / 已入场
+            </div>
+            <button class="primary block">完成 · 返回车辆核验</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>车辆放行 · 拒绝入场页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>拒绝入场</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="success-state">
+            <div class="success-symbol danger">✕</div>
+            <h2>已拒绝入场</h2>
+            <p>本次拒绝操作已写入通行台账留痕<br>关联嘉宾行程保持原状</p>
+            <div class="record-slip">
+              <strong>通行台账 #G202607230087</strong><br>
+              车牌：京A8888W<br>
+              时间：2026-07-23 09:41:26<br>
+              操作人：王强（会务人员）<br>
+              原因：非 VIP 白名单车辆<br>
+              状态：已拒绝
+            </div>
+            <button class="primary block">完成 · 返回车辆核验</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-section">
+    <h2>车辆放行 · 通行台账完成页</h2>
+    <div class="phone-shell">
+      <div class="phone-screen">
+        <div class="phone-status"><span>9:41</span><span>● ◔ ▰</span></div>
+        <div class="mobile-head"><button>‹</button><strong>通行台账已记录</strong><span></span></div>
+        <div class="mobile-page">
+          <div class="success-state">
+            <div class="success-symbol" style="background:var(--blue-weak);color:var(--blue);">✓</div>
+            <h2>通行台账已写入</h2>
+            <p>本次车辆核验记录已留存<br>关联嘉宾行程状态已同步更新</p>
+            <div class="record-slip" style="margin-bottom:22px;">
+              <strong>业务闭环提示</strong><br>
+              · 行程状态「已入场」可在行程填报中查看<br>
+              · 拒绝记录可供安保主管追溯调阅<br>
+              · 操作日志留存 180 天
+            </div>
+            <button class="primary block">继续核验下一辆车</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
