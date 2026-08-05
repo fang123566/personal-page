@@ -37,7 +37,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-touch-callout: none;
-    overflow-x: hidden;
 }
 
 ul {
@@ -97,8 +96,7 @@ a {
    ========================================================================== */
 
 main {
-    position: relative;
-    width: 100%;
+    overflow: hidden;
 }
 
 .content {
