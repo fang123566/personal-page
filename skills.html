@@ -4,129 +4,196 @@
     <title>能力 · yuan</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2">
-    <meta name="theme-color" content="#0a0a0f">
+    <meta name="theme-color" content="#f8f9fc">
     <meta name="description" content="yuan - AI 产品能力栈">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/skills.css">
 </head>
 <body>
-<canvas class="bg-canvas" id="bgCanvas"></canvas>
 
-<nav class="nav">
-    <a href="index.html" class="nav-back">
-        <span class="nav-arrow">←</span>
-        <span>主页</span>
+<!-- 流体背景 canvas (鼠标按下时产生蓝色波纹) -->
+<canvas id="background"></canvas>
+
+<!-- 网格贪吃蛇 canvas -->
+<canvas class="grid-background" id="gridCanvas"></canvas>
+
+<nav class="topbar">
+    <a href="index.html" class="topbar__back">
+        <span class="arrow">←</span>
+        <span class="back-text">home</span>
     </a>
-    <div class="nav-title">能力</div>
-    <div class="nav-spacer"></div>
+    <div class="topbar__center">capabilities / yuan</div>
+    <div class="topbar__year">2025</div>
 </nav>
 
-<main class="skills-page">
-    <header class="page-header">
-        <h1 class="page-title">Skills</h1>
-        <p class="page-subtitle">AI 产品能力矩阵</p>
-    </header>
+<main class="page">
 
-    <!-- 技能标签云 -->
-    <section class="skills-cloud">
-        <div class="cloud-wrapper">
-            <span class="cloud-tag cloud-tag--lg" data-weight="1">AI 产品方法论</span>
-            <span class="cloud-tag cloud-tag--md" data-weight="0.9">大模型 & LLM</span>
-            <span class="cloud-tag cloud-tag--lg" data-weight="1">数据分析</span>
-            <span class="cloud-tag cloud-tag--sm" data-weight="0.7">Prompt 工程</span>
-            <span class="cloud-tag cloud-tag--md" data-weight="0.85">PRD 撰写</span>
-            <span class="cloud-tag cloud-tag--sm" data-weight="0.6">RAG 设计</span>
-            <span class="cloud-tag cloud-tag--lg" data-weight="1">原型设计</span>
-            <span class="cloud-tag cloud-tag--md" data-weight="0.8">SQL</span>
-            <span class="cloud-tag cloud-tag--sm" data-weight="0.65">Python</span>
-            <span class="cloud-tag cloud-tag--md" data-weight="0.85">竞品分析</span>
-            <span class="cloud-tag cloud-tag--lg" data-weight="1">跨部门协作</span>
-            <span class="cloud-tag cloud-tag--sm" data-weight="0.7">Figma</span>
-            <span class="cloud-tag cloud-tag--md" data-weight="0.8">A/B 测试</span>
-            <span class="cloud-tag cloud-tag--sm" data-weight="0.6">LangChain</span>
-            <span class="cloud-tag cloud-tag--lg" data-weight="1">用户增长</span>
-            <span class="cloud-tag cloud-tag--md" data-weight="0.85">项目管理</span>
-            <span class="cloud-tag cloud-tag--sm" data-weight="0.7">Coze / Dify</span>
-            <span class="cloud-tag cloud-tag--md" data-weight="0.8">结构化思维</span>
+    <!-- Intro / Hero -->
+    <section class="intro">
+        <h1 class="intro__title">AI 产品能力矩阵</h1>
+        <h2 class="intro__subtitle">
+            <span class="ch" style="--i:0">A</span><span class="ch" style="--i:1">I</span><span class="ch" style="--i:2">&nbsp;</span><span class="ch" style="--i:3">产</span><span class="ch" style="--i:4">品</span><span class="ch" style="--i:5">&nbsp;</span><span class="ch" style="--i:6">方</span><span class="ch" style="--i:7">向</span><span class="ch" style="--i:8">&nbsp;</span><span class="ch" style="--i:9">探</span><span class="ch" style="--i:10">索</span><span class="ch" style="--i:11">中</span>
+        </h2>
+        <p class="intro__hint">按 / 拖动鼠标 · 体验流体背景 · 网格跟随</p>
+    </section>
+
+    <!-- 数据指标 - 高級 time-strip -->
+    <section class="metrics">
+        <div class="metrics__line"></div>
+        <div class="metrics__grid">
+            <div class="metric" data-target="120" data-suffix="+">
+                <div class="metric__num"><span class="counter">—</span><sup class="metric__suf">+</sup></div>
+                <div class="metric__label">Prompt 模板沉淀</div>
+                <div class="metric__shimmer"></div>
+            </div>
+            <div class="metric" data-target="50" data-suffix="+">
+                <div class="metric__num"><span class="counter">—</span><sup class="metric__suf">+</sup></div>
+                <div class="metric__label">PRD 文档交付</div>
+                <div class="metric__shimmer"></div>
+            </div>
+            <div class="metric" data-target="8" data-suffix="">
+                <div class="metric__num"><span class="counter">—</span><sup class="metric__suf"></sup></div>
+                <div class="metric__label">产品方向探索</div>
+                <div class="metric__shimmer"></div>
+            </div>
+            <div class="metric" data-target="2" data-suffix="">
+                <div class="metric__num"><span class="counter">—</span><sup class="metric__suf"></sup></div>
+                <div class="metric__label">年持续深耕</div>
+                <div class="metric__shimmer"></div>
+            </div>
         </div>
     </section>
 
-    <!-- 能力卡片 -->
-    <section class="skills-cards">
-        <div class="card-grid">
-            
-            <article class="skill-card">
-                <div class="skill-card__num">01</div>
-                <h3>AI 产品能力</h3>
-                <div class="skill-card__line"></div>
-                <ul class="skill-card__list">
-                    <li>用户访谈 & 需求挖掘</li>
-                    <li>智能体编排设计</li>
-                    <li>Prompt 工程 & 评测</li>
-                    <li>RAG 方案设计</li>
-                    <li>PRD / 原型 / 流程图</li>
-                </ul>
-            </article>
+    <!-- 五大能力域 - 像原项目的卡片网格 -->
+    <section class="caps">
+        <article class="cap">
+            <div class="cap__head">
+                <span class="cap__icon">◆</span>
+                <h3 class="cap__name">AI 产品方法论</h3>
+            </div>
+            <p class="cap__lead">主导 AI 产品全生命周期，需求挖掘到上线运营闭环。</p>
+            <ul class="cap__list">
+                <li><span>需求挖掘 · 用户访谈</span><strong>95%</strong></li>
+                <li><span>PRD · 原型设计</span><strong>92%</strong></li>
+                <li><span>跨部门协作</span><strong>90%</strong></li>
+                <li><span>数据驱动决策</span><strong>88%</strong></li>
+            </ul>
+            <div class="cap__tags"><span>PRD</span><span>评测</span><span>迭代</span><span>用户研究</span></div>
+            <div class="cap__bar"><div class="cap__bar-fill" data-pct="92"></div></div>
+        </article>
 
-            <article class="skill-card">
-                <div class="skill-card__num">02</div>
-                <h3>大模型技术</h3>
-                <div class="skill-card__line"></div>
-                <ul class="skill-card__list">
-                    <li>OpenAI / Claude API</li>
-                    <li>Coze / Dify 平台</li>
-                    <li>LangChain / LangGraph</li>
-                    <li>Function Calling</li>
-                    <li>Embedding 检索</li>
-                </ul>
-            </article>
+        <article class="cap">
+            <div class="cap__head">
+                <span class="cap__icon">◈</span>
+                <h3 class="cap__name">大模型 & Agent</h3>
+            </div>
+            <p class="cap__lead">设计多 Agent 协作链路，沉淀组件级 Prompt 模板。</p>
+            <ul class="cap__list">
+                <li><span>Prompt 工程</span><strong>93%</strong></li>
+                <li><span>Agent 编排</span><strong>88%</strong></li>
+                <li><span>RAG 设计</span><strong>85%</strong></li>
+                <li><span>评测体系</span><strong>80%</strong></li>
+            </ul>
+            <div class="cap__tags"><span>Coze</span><span>Dify</span><span>LangChain</span><span>OpenAI</span></div>
+            <div class="cap__bar"><div class="cap__bar-fill" data-pct="88"></div></div>
+        </article>
 
-            <article class="skill-card">
-                <div class="skill-card__num">03</div>
-                <h3>数据分析</h3>
-                <div class="skill-card__line"></div>
-                <ul class="skill-card__list">
-                    <li>SQL 查询优化</li>
-                    <li>Pandas 数据处理</li>
-                    <li>漏斗分析 & 用户画像</li>
-                    <li>数据看板搭建</li>
-                    <li>需求池管理</li>
-                </ul>
-            </article>
+        <article class="cap">
+            <div class="cap__head">
+                <span class="cap__icon">◉</span>
+                <h3 class="cap__name">数据分析</h3>
+            </div>
+            <p class="cap__lead">从数据提取到决策洞察，构建完整的指标体系。</p>
+            <ul class="cap__list">
+                <li><span>SQL 查询</span><strong>88%</strong></li>
+                <li><span>Python / Pandas</span><strong>85%</strong></li>
+                <li><span>漏斗 & 画像</span><strong>90%</strong></li>
+                <li><span>A/B 测试</span><strong>82%</strong></li>
+            </ul>
+            <div class="cap__tags"><span>SQL</span><span>Python</span><span>漏斗</span><span>留存</span></div>
+            <div class="cap__bar"><div class="cap__bar-fill" data-pct="86"></div></div>
+        </article>
 
-            <article class="skill-card">
-                <div class="skill-card__num">04</div>
-                <h3>开发技能</h3>
-                <div class="skill-card__line"></div>
-                <ul class="skill-card__list">
-                    <li>Python / JavaScript</li>
-                    <li>Flask Web 开发</li>
-                    <li>Git / GitHub</li>
-                    <li>API 调试</li>
-                    <li>微信小程序</li>
-                </ul>
-            </article>
+        <article class="cap">
+            <div class="cap__head">
+                <span class="cap__icon">▣</span>
+                <h3 class="cap__name">全栈开发</h3>
+            </div>
+            <p class="cap__lead">能独立完成 Demo 与工具链搭建，开发能力支撑产品落地。</p>
+            <ul class="cap__list">
+                <li><span>Python / Flask</span><strong>85%</strong></li>
+                <li><span>JavaScript</span><strong>78%</strong></li>
+                <li><span>Git / GitHub</span><strong>90%</strong></li>
+                <li><span>微信小程序</span><strong>82%</strong></li>
+            </ul>
+            <div class="cap__tags"><span>Python</span><span>Flask</span><span>小程序</span><span>JS</span></div>
+            <div class="cap__bar"><div class="cap__bar-fill" data-pct="84"></div></div>
+        </article>
 
-        </div>
+        <article class="cap">
+            <div class="cap__head">
+                <span class="cap__icon">✦</span>
+                <h3 class="cap__name">设计 & 表达</h3>
+            </div>
+            <p class="cap__lead">让产品可被清晰感知，用结构化表达降低协作成本。</p>
+            <ul class="cap__list">
+                <li><span>Figma 原型</span><strong>88%</strong></li>
+                <li><span>流程图 / BPMN</span><strong>90%</strong></li>
+                <li><span>结构化文档</span><strong>92%</strong></li>
+                <li><span>演讲 & 答辩</span><strong>85%</strong></li>
+            </ul>
+            <div class="cap__tags"><span>Figma</span><span>Axure</span><span>draw.io</span><span>Xmind</span></div>
+            <div class="cap__bar"><div class="cap__bar-fill" data-pct="89"></div></div>
+        </article>
+
+        <article class="cap cap--qualities">
+            <div class="cap__head">
+                <span class="cap__icon">❖</span>
+                <h3 class="cap__name">综合素养</h3>
+            </div>
+            <p class="cap__lead">持续学习者，相信慢就是快，构建可复用的认知框架。</p>
+            <ul class="cap__qualities">
+                <li>结构化思维 & 第一性原理</li>
+                <li>用户视角 & 商业 Sense</li>
+                <li>技术理解 & 快速学习能力</li>
+                <li>抗压能力 & 项目 Owner 意识</li>
+                <li>清晰表达 & 跨团队协作</li>
+            </ul>
+        </article>
     </section>
 
     <!-- 工具栈 -->
-    <section class="tools-section">
-        <h2 class="section-title">工具栈</h2>
-        <div class="tools-row">
-            <span class="tool-tag">Figma</span>
-            <span class="tool-tag">Axure</span>
-            <span class="tool-tag">Notion</span>
-            <span class="tool-tag">飞书</span>
-            <span class="tool-tag">Xmind</span>
-            <span class="tool-tag">draw.io</span>
-            <span class="tool-tag">墨刀</span>
-            <span class="tool-tag">SQL Server</span>
+    <section class="tools">
+        <h3 class="tools__title">常用工具栈</h3>
+        <div class="tools__cloud">
+            <span class="tools__item">Figma</span>
+            <span class="tools__item">Axure</span>
+            <span class="tools__item">Notion</span>
+            <span class="tools__item">飞书</span>
+            <span class="tools__item">Xmind</span>
+            <span class="tools__item">draw.io</span>
+            <span class="tools__item">墨刀</span>
+            <span class="tools__item">Jira</span>
+            <span class="tools__item">SQL Server</span>
+            <span class="tools__item">VS Code</span>
+            <span class="tools__item">Git</span>
+            <span class="tools__item">Postman</span>
         </div>
     </section>
+
 </main>
 
+<footer class="footer">
+    <span>© 2025 yuan</span>
+    <span>capabilities / press mouse to ripple</span>
+    <span>
+        <a href="mailto:1628042268@qq.com">mail</a> ·
+        <a href="https://github.com/fang123566">github</a>
+    </span>
+</footer>
+
+<script src="js/anime.min.js"></script>
 <script src="js/skills.js"></script>
 </body>
 </html>

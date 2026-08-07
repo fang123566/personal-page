@@ -11,135 +11,443 @@
     <link rel="stylesheet" href="css/experience.css">
 </head>
 <body>
-<canvas class="bg-canvas" id="bgCanvas"></canvas>
 
-<nav class="nav">
-    <a href="index.html" class="nav-back">
-        <span class="nav-arrow">←</span>
-        <span>主页</span>
+<canvas id="background"></canvas>
+<canvas class="grid-background" id="gridCanvas"></canvas>
+
+<nav class="topbar">
+    <a href="index.html" class="topbar__back">
+        <span class="arrow">←</span>
+        <span class="back-text">home</span>
     </a>
-    <div class="nav-title">经验</div>
-    <div class="nav-spacer"></div>
+    <div class="topbar__center">experience / yuan</div>
 </nav>
 
-<main class="experience-page">
-    <header class="page-header">
-        <h1 class="page-title">Experience</h1>
-        <p class="page-subtitle">AI 产品实战经验</p>
-    </header>
+<main class="page">
+
+    <!-- Intro -->
+    <section class="intro">
+        <h1 class="intro__title">AI 产品实战经验</h1>
+        <h2 class="intro__subtitle">
+            <span class="ch" style="--i:0">每</span><span class="ch" style="--i:1">一</span><span class="ch" style="--i:2">段</span><span class="ch" style="--i:3">经</span><span class="ch" style="--i:4">历</span><span class="ch" style="--i:5">&nbsp;</span><span class="ch" style="--i:6">都</span><span class="ch" style="--i:7">&nbsp;</span><span class="ch" style="--i:8">是</span><span class="ch" style="--i:9">&nbsp;</span><span class="ch" style="--i:10">方</span><span class="ch" style="--i:11">法</span><span class="ch" style="--i:12">论</span><span class="ch" style="--i:13">&nbsp;</span><span class="ch" style="--i:14">的</span><span class="ch" style="--i:15">&nbsp;</span><span class="ch" style="--i:16">沉</span><span class="ch" style="--i:17">淀</span>
+        </h2>
+    </section>
 
     <!-- 实习经历 -->
-    <section class="exp-section">
-        <h2 class="section-label">实习经历</h2>
+    <section class="internships">
+        <h3 class="section-title">实习经历 · AI Product Intern</h3>
+
+        <article class="job">
+            <div class="job__head">
+                <h4 class="job__title">AI 产品实习生</h4>
+            </div>
+            <div class="job__body">
+                <p class="job__desc">
+                    负责"工地大脑"产品设计、智博会 H5 系统落地、AIPPT 智能体及超级制单助手等产品设计，主导需求调研、产品原型设计与 AI 功能集成。
+                </p>
+
+                <div class="job__projects">
+
+                    <!-- 项目一：工地大脑 -->
+                    <div class="jp">
+                        <div class="jp__info">
+                            <div class="jp__meta">
+                                <span class="jp__cat">智慧工地 · 信息聚合</span>
+                                <span class="jp__type">核心项目</span>
+                            </div>
+                            <h5 class="jp__name">工地大脑 - 信息聚合与超级制单联动系统</h5>
+                            <p class="jp__desc">
+                                面向建造业的信息聚合与结构化处理平台，通过业微工作会话SDK自动采集项目群消息，解析为结构化事件并联动超级制单系统实现业务闭环。
+                            </p>
+                            <ul class="jp__points">
+                                <li><strong>信息聚合：</strong>通过业微工作会话数据SDK实现项目群消息自动采集，构建"信息聚合层 → 结构化处理层 → 三局通接入层"三层架构</li>
+                                <li><strong>结构化处理：</strong>将群消息自动解析为结构化事件（包含基本信息、事件类型、关联人员等字段），生成任务清单</li>
+                                <li><strong>角色链路：</strong>设计项目总监→实施经理→安全员→监理员等角色的工作场景链路，覆盖信息聚合→事件识别→任务派单→安全审核全链路</li>
+                                <li><strong>超级制单联动：</strong>支持制单任务自动下发、任务状态实时同步、到期自动提醒，与业微超级制单系统打通形成完整业务闭环</li>
+                            </ul>
+                            <div class="jp__tags">
+                                <span>信息聚合</span><span>结构化处理</span><span>超级制单</span>
+                                <span>业微SDK</span><span>三局通</span><span>B 端</span>
+                            </div>
+                        </div>
+                        <div class="jp__gallery">
+                            <div class="gallery" id="gallery-1">
+                                <div class="gallery__track" id="gallery-track-1">
+                                    <img src="assets/brain/brain_1.png" alt="产品需求文档" loading="lazy">
+                                    <img src="assets/brain/brain_2.png" alt="系统架构设计" loading="lazy">
+                                    <img src="assets/brain/brain_3.png" alt="角色链路图" loading="lazy">
+                                    <img src="assets/brain/brain_4.png" alt="功能清单" loading="lazy">
+                                    <img src="assets/brain/brain_5.png" alt="任务分解" loading="lazy">
+                                    <img src="assets/brain/brain_6.png" alt="实施落地" loading="lazy">
+                                    <img src="assets/brain/brain_7.png" alt="超级制单联动" loading="lazy">
+                                    <img src="assets/brain/brain_8.png" alt="效果验证" loading="lazy">
+                                </div>
+                                <div class="gallery__controls">
+                                    <button class="gallery__btn gallery__btn--prev" aria-label="上一张">‹</button>
+                                    <div class="gallery__dots" id="gallery-dots-1"></div>
+                                    <button class="gallery__btn gallery__btn--next" aria-label="下一张">›</button>
+                                </div>
+                                <div class="gallery__counter"><span id="gallery-cur-1">1</span> / <span id="gallery-total-1">8</span></div>
+                            </div>
+                            <div class="jp__docs">
+                                <a href="实习文档/工地大脑相关文档/工地大脑系统需求说明书.pdf" target="_blank" class="doc-btn">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    需求文档
+                                </a>
+                                <a href="实习文档/工地大脑相关文档/工地大脑功能清单v2.6.xlsx" target="_blank" class="doc-btn">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    功能清单
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 项目二：AIPPT 多 Agent 协作 PPT 生成 -->
+                    <div class="jp">
+                        <div class="jp__info">
+                            <div class="jp__meta">
+                                <span class="jp__cat">Agent · PPT 生成</span>
+                                <span class="jp__type">核心项目</span>
+                            </div>
+                            <h5 class="jp__name">AIPPT - 多 Agent 协作 PPT 生成系统</h5>
+                            <p class="jp__desc">
+                                基于 HiAgent 平台搭建的智能 PPT 生成系统，通过多 Agent 串联编排实现从文档上传到 PPT 生成的全流程自动化。
+                            </p>
+                            <ul class="jp__points">
+                                <li><strong>多 Agent 编排：</strong>Start → 文件提取 → 10 要素校验 → 知识库检索 → 页面规划 → 详细撰写 → 质量审查 → End 八节点流程</li>
+                                <li><strong>10 要素校验：</strong>产品定位、受众群体、页数要求、设计风格、主色调、排版密度、功能组件、受众痛点、业务场景、展示案例</li>
+                                <li><strong>智能追问：</strong>要素缺失时自动启动追问流程，支持简单模式（5-7 分）与高级模式（8-10 分）自动切换</li>
+                                <li><strong>质量保障：</strong>质量审查节点确保关键约束无遗漏，页数结构与设计风格符合要求</li>
+                            </ul>
+                            <div class="jp__tags">
+                                <span>HiAgent</span><span>Prompt 工程</span><span>Agent 编排</span>
+                                <span>知识库检索</span><span>多模态</span>
+                            </div>
+                        </div>
+                        <div class="jp__gallery">
+                            <div class="gallery" id="gallery-2">
+                                <div class="gallery__track" id="gallery-track-2"></div>
+                                <div class="gallery__controls">
+                                    <button class="gallery__btn gallery__btn--prev" aria-label="上一张">‹</button>
+                                    <div class="gallery__dots" id="gallery-dots-2"></div>
+                                    <button class="gallery__btn gallery__btn--next" aria-label="下一张">›</button>
+                                </div>
+                                <div class="gallery__counter"><span id="gallery-cur-2">1</span> / <span id="gallery-total-2">0</span></div>
+                                <div class="gallery-hint">📷 截图待补充</div>
+                            </div>
+                            <div class="jp__docs">
+                                <a href="实习文档/AIPPT相关文档/agent_specification.pdf" target="_blank" class="doc-btn">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    智能体方案
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 项目三：智博会 H5 -->
+                    <div class="jp">
+                        <div class="jp__info">
+                            <div class="jp__meta">
+                                <span class="jp__cat">H5 · OCR 识别</span>
+                                <span class="jp__type">B 端落地</span>
+                            </div>
+                            <h5 class="jp__name">智能建造博览会 H5 行程填报 + VIP 车牌识别放行系统</h5>
+                            <p class="jp__desc">
+                                针对智能建造博览会设计的 B 端管理系统，实现 VIP 车辆自动识别、无纸化入场与智能放行。
+                            </p>
+                            <ul class="jp__points">
+                                <li><strong>会务行程填报：</strong>支持新增/搜索嘉宾、行程信息（交通/住宿/接站）录入与实时同步</li>
+                                <li><strong>VIP 车牌识别：</strong>保安拍照 → OCR 识别 → 白名单匹配 → 自动放行/拒绝，识别置信度 98.6%</li>
+                                <li><strong>通行台账：</strong>所有操作（放行/拒绝）写入台账留痕，支持 180 天追溯</li>
+                                <li><strong>用户体验：</strong>无纸化填报流程，参展人员入场效率提升 60%+</li>
+                            </ul>
+                            <div class="jp__tags">
+                                <span>OCR</span><span>车牌识别</span><span>H5</span>
+                                <span>PRD</span><span>原型设计</span><span>B 端</span>
+                            </div>
+                        </div>
+                        <div class="jp__gallery">
+                            <div class="gallery" id="gallery-3">
+                                <div class="gallery__tabs">
+                                    <button class="gallery__tab active" data-gallery="gallery-3" data-set="prototype">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                                        产品原型
+                                    </button>
+                                    <button class="gallery__tab" data-gallery="gallery-3" data-set="flowchart">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 3v6m0 6v6m-9-9h6m6 0h6"/></svg>
+                                        业务流程图
+                                    </button>
+                                </div>
+                                <div class="gallery__track" id="gallery-track-3"></div>
+                                <div class="gallery__controls">
+                                    <button class="gallery__btn gallery__btn--prev" aria-label="上一张">‹</button>
+                                    <div class="gallery__dots" id="gallery-dots-3"></div>
+                                    <button class="gallery__btn gallery__btn--next" aria-label="下一张">›</button>
+                                </div>
+                                <div class="gallery__counter"><span id="gallery-cur-3">1</span> / <span id="gallery-total-3">3</span></div>
+                            </div>
+                            <div class="jp__docs">
+                                <a href="实习文档/智能建造博览会H5行程填报+VIP车牌识别放行系统/功能清单_智能建造博览会.xlsx" target="_blank" class="doc-btn">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    功能清单
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 项目四：超级制单助手 -->
+                    <div class="jp">
+                        <div class="jp__info">
+                            <div class="jp__meta">
+                                <span class="jp__cat">B 端 · 流程自动化</span>
+                                <span class="jp__type">核心项目</span>
+                            </div>
+                            <h5 class="jp__name">超级制单助手 - 企业微信消息自动制单系统</h5>
+                            <p class="jp__desc">
+                                面向建造业企业的制单自动化工具，通过企业微信消息自动识别制单需求，联动业务系统实现制单流程自动化。
+                            </p>
+                            <ul class="jp__points">
+                                <li><strong>消息识别：</strong>自动采集项目群消息，识别制单需求并提取关键信息</li>
+                                <li><strong>流程自动化：</strong>支持制单任务自动下发、状态实时同步、到期自动提醒</li>
+                                <li><strong>多端协同：</strong>支持移动端随时查看和处理制单任务</li>
+                            </ul>
+                            <div class="jp__tags">
+                                <span>企业微信</span><span>流程自动化</span><span>消息识别</span>
+                                <span>B 端</span><span>原型设计</span>
+                            </div>
+                        </div>
+                        <div class="jp__gallery">
+                            <div class="gallery" id="gallery-4">
+                                <div class="gallery__track" id="gallery-track-4"></div>
+                                <div class="gallery__controls">
+                                    <button class="gallery__btn gallery__btn--prev" aria-label="上一张">‹</button>
+                                    <div class="gallery__dots" id="gallery-dots-4"></div>
+                                    <button class="gallery__btn gallery__btn--next" aria-label="下一张">›</button>
+                                </div>
+                                <div class="gallery__counter"><span id="gallery-cur-4">1</span> / <span id="gallery-total-4">0</span></div>
+                            </div>
+                            <div class="jp__docs">
+                                <a href="实习文档/超级制单助手/超级制单助手项目产品需求清单.xlsx" target="_blank" class="doc-btn">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    产品需求清单
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <!-- GitHub 项目展示 -->
+    <section class="github-projects">
+        <h3 class="section-title">GitHub 项目 · Open Source Projects</h3>
+        <p class="projects-intro">个人开源项目实践，代码已开源至 GitHub，持续更新中...</p>
         
-        <div class="timeline">
-            
-            <article class="timeline-item">
-                <div class="timeline-meta">
-                    <span class="timeline-year">2026</span>
-                    <span class="timeline-tag">实习</span>
-                </div>
-                <div class="timeline-content">
-                    <h3>AIPPT 智能生成框架</h3>
-                    <p class="timeline-desc">独立完成 Agent 框架设计、Prompt 规范、PPT 拆解知识库与排版美学规范。设计"大纲 Agent → 章节 Agent → 配图 Agent → 校验 Agent"多 Agent 协作链，沉淀组件级 Prompt 模板 50+。</p>
-                </div>
-            </article>
-
-            <article class="timeline-item">
-                <div class="timeline-meta">
-                    <span class="timeline-year">2026</span>
-                    <span class="timeline-tag">实习</span>
-                </div>
-                <div class="timeline-content">
-                    <h3>天分数据系统迭代</h3>
-                    <p class="timeline-desc">主导角色成长路线图 v2.0/v2.6 版本迭代，覆盖 AI 生成视频脚本、智能配音等模块。设计"功能 → AI 讲解视频"的智能体链路，沉淀为可复用 pipeline。</p>
-                </div>
-            </article>
-
-            <article class="timeline-item">
-                <div class="timeline-meta">
-                    <span class="timeline-year">2026</span>
-                    <span class="timeline-tag">实习</span>
-                </div>
-                <div class="timeline-content">
-                    <h3>智能决策扶读 H5</h3>
-                    <p class="timeline-desc">包含行程填报与 VIP 车牌识别放行两大模块。保安拍摄车牌照片 → OCR 识别 → 系统判断 → 确认放行，数字化闭环。</p>
-                </div>
-            </article>
-
+        <div class="projects-grid" id="projectsGrid">
+            <!-- 项目将通过 JavaScript 动态加载 -->
+            <div class="project-loading">
+                <div class="loading-spinner"></div>
+                <span>加载中...</span>
+            </div>
+        </div>
+        
+        <div class="github-link">
+            <a href="https://github.com/fang123566" target="_blank" rel="noopener noreferrer">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                查看更多 GitHub 项目 →
+            </a>
         </div>
     </section>
 
-    <!-- 个人项目 -->
-    <section class="exp-section">
-        <h2 class="section-label">个人项目</h2>
-
-        <div class="projects-grid">
-            
-            <article class="project-card">
-                <div class="project-card__header">
-                    <span class="project-card__num">01</span>
-                    <span class="project-card__cat">AI 应用</span>
-                </div>
-                <h3>阿尔茨海默老人智能守护陪伴小程序</h3>
-                <p class="project-card__desc">面向阿尔茨海默病及认知障碍老人的微信小程序，围绕走失风险、AI 情绪陪伴与方言语音交互，提供老人端 + 家属端双角色智能守护方案。</p>
-                <div class="project-card__stack">
-                    <span>微信小程序</span>
-                    <span>讯飞星火</span>
-                    <span>阿里云短信</span>
-                </div>
-                <a class="project-card__link" href="https://github.com/fang123566/alzheimer-dementia-wandering-miniprogram" target="_blank">查看源码 →</a>
-            </article>
-
-            <article class="project-card">
-                <div class="project-card__header">
-                    <span class="project-card__num">02</span>
-                    <span class="project-card__cat">计算机视觉</span>
-                </div>
-                <h3>ASL 美国手语实时识别系统</h3>
-                <p class="project-card__desc">基于 MediaPipe HandLandmarker + SVM 的实时 A–Z 手语识别系统，测试准确率 99.65%。</p>
-                <div class="project-card__stack">
-                    <span>MediaPipe</span>
-                    <span>SVM</span>
-                    <span>Flask</span>
-                </div>
-                <a class="project-card__link" href="https://github.com/fang123566/computer-vision" target="_blank">查看源码 →</a>
-            </article>
-
-            <article class="project-card">
-                <div class="project-card__header">
-                    <span class="project-card__num">03</span>
-                    <span class="project-card__cat">推荐系统</span>
-                </div>
-                <h3>电影推荐系统</h3>
-                <p class="project-card__desc">基于 Flask + SQL Server 的全栈电影信息与推荐 Web 应用，集成 120 部真实中文电影数据。</p>
-                <div class="project-card__stack">
-                    <span>Flask</span>
-                    <span>SQL Server</span>
-                    <span>scikit-surprise</span>
-                </div>
-                <a class="project-card__link" href="https://github.com/fang123566/movie-recommendation-system-main" target="_blank">查看源码 →</a>
-            </article>
-
-            <article class="project-card">
-                <div class="project-card__header">
-                    <span class="project-card__num">04</span>
-                    <span class="project-card__cat">全栈</span>
-                </div>
-                <h3>医院挂号管理系统</h3>
-                <p class="project-card__desc">基于 Java Servlet、JSP 和 MySQL 的医院挂号管理系统，支持病人注册、医生管理、挂号、Excel 导出等功能。</p>
-                <div class="project-card__stack">
-                    <span>Java</span>
-                    <span>Servlet</span>
-                    <span>MySQL</span>
-                </div>
-                <a class="project-card__link" href="https://github.com/fang123566/Hospital-Management-System" target="_blank">查看源码 →</a>
-            </article>
-
-        </div>
-    </section>
 </main>
 
+<footer class="footer">
+    <span>© yuan</span>
+    <span>experience</span>
+    <span>
+        <a href="mailto:1628042268@qq.com">mail</a> ·
+        <a href="https://github.com/fang123566">github</a>
+    </span>
+</footer>
+
+<script src="js/anime.min.js"></script>
 <script src="js/experience.js"></script>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+    <button class="lightbox__close" onclick="closeLightbox()">×</button>
+    <button class="lightbox__nav lightbox__nav--prev" onclick="lbNav(-1)">‹</button>
+    <img src="" alt="">
+    <button class="lightbox__nav lightbox__nav--next" onclick="lbNav(1)">›</button>
+</div>
+
+<script>
+// 从 GitHub 获取项目列表
+async function fetchGitHubProjects() {
+    const username = 'fang123566';
+    const projectsGrid = document.getElementById('projectsGrid');
+    
+    try {
+        const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
+        const repos = await response.json();
+        
+        // 项目元数据映射
+        const projectMeta = {
+            'alzheimer-dementia-wandering-miniprogram': {
+                description: '基于 AI 的老年痴呆症走失守护小程序，结合智能定位与家属联动功能',
+                image: 'assets/projects/github-alzheimer-real.png',
+                features: ['AI 定位', '家属联动', '微信小程序']
+            },
+            'mainew-shoyuDetection': {
+                description: '基于深度学习的酱油品质检测系统，使用计算机视觉技术实现自动化质检',
+                image: 'assets/projects/github-shoyu-detection.png',
+                features: ['深度学习', '计算机视觉', 'Python']
+            },
+            'Exhibition-of-Hui-style-architecture-culture-': {
+                description: '徽派建筑文化数字展馆，交互式 Web 体验展示传统建筑之美',
+                image: 'assets/projects/github-vision.png',
+                features: ['Web 交互', '数字展馆', 'HTML5']
+            },
+            'computer-vision': {
+                description: '计算机视觉学习与实践项目，涵盖图像识别、目标检测等核心算法',
+                image: 'assets/projects/github-vision.png',
+                features: ['图像识别', '目标检测', '机器学习']
+            },
+            'Hospital-Management-System': {
+                description: '医院综合管理系统，实现门诊、住院、药品等模块化管理',
+                image: null,
+                features: ['Java', 'SSM框架', 'MySQL']
+            },
+            'movie-recommendation-system-main': {
+                description: '个性化电影推荐系统，基于协同过滤与深度学习算法',
+                image: null,
+                features: ['推荐算法', 'Python', '数据挖掘']
+            }
+        };
+        
+        // 筛选和排序
+        const importantRepos = Object.keys(projectMeta);
+        const filteredRepos = repos
+            .filter(repo => !repo.fork && repo.name !== 'personal-page' && repo.name !== 'yuan-s-world')
+            .sort((a, b) => {
+                const aIndex = importantRepos.indexOf(a.name);
+                const bIndex = importantRepos.indexOf(b.name);
+                if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+                if (aIndex !== -1) return -1;
+                if (bIndex !== -1) return 1;
+                return new Date(b.updated_at) - new Date(a.updated_at);
+            })
+            .slice(0, 6);
+        
+        // 生成项目卡片 HTML
+        let projectsHTML = '';
+        
+        filteredRepos.forEach((repo, index) => {
+            const meta = projectMeta[repo.name] || {};
+            const langColors = {
+                'JavaScript': '#f1e05a',
+                'TypeScript': '#3178c6',
+                'Python': '#3572A5',
+                'HTML': '#e34c26',
+                'CSS': '#563d7c',
+                'Java': '#b07219',
+                'Vue': '#41b883'
+            };
+            
+            const primaryLanguage = repo.language || 'Code';
+            const langColor = langColors[primaryLanguage] || '#6e7681';
+            const stars = repo.stargazers_count || 0;
+            const forks = repo.forks_count || 0;
+            
+            const description = meta.description || repo.description || '一个有趣的项目，等待探索...';
+            const features = meta.features || [primaryLanguage];
+            
+            // 更新日期
+            const updateDate = new Date(repo.updated_at).toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: 'short'
+            });
+            
+            projectsHTML += `
+                <article class="project-card" data-index="${index}" style="animation-delay: ${index * 0.1}s">
+                    ${meta.image ? `
+                    <div class="project-card__cover">
+                        <img src="${meta.image}" alt="${repo.name}" loading="lazy">
+                    </div>
+                    ` : ''}
+                    <div class="project-card__content">
+                        <div class="project-card__header">
+                            <div class="project-card__meta">
+                                <span class="project-card__date">${updateDate}</span>
+                            </div>
+                        </div>
+                        <h4 class="project-card__title">${repo.name}</h4>
+                        <p class="project-card__desc">${description}</p>
+                        <div class="project-card__features">
+                            ${features.map(f => `<span class="feature-tag">${f}</span>`).join('')}
+                        </div>
+                        <div class="project-card__footer">
+                            <div class="project-card__lang">
+                                <span class="lang-dot" style="background: ${langColor}"></span>
+                                ${primaryLanguage}
+                            </div>
+                            <div class="project-card__stats">
+                                <span class="stat">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                    </svg>
+                                    ${stars}
+                                </span>
+                                <span class="stat">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4H6zM3 6h18M16 10a4 4 0 0 1-8 0"/>
+                                    </svg>
+                                    ${forks}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="project-card__link">
+                        <span>查看项目</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                        </svg>
+                    </a>
+                </article>
+            `;
+        });
+        
+        projectsGrid.innerHTML = projectsHTML;
+        
+        // 添加动画
+        setTimeout(() => {
+            document.querySelectorAll('.project-card').forEach((card, i) => {
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, i * 100);
+            });
+        }, 100);
+        
+    } catch (error) {
+        console.error('Failed to fetch GitHub projects:', error);
+        projectsGrid.innerHTML = `
+            <div class="project-error">
+                <p>加载项目失败</p>
+                <a href="https://github.com/fang123566" target="_blank" rel="noopener noreferrer">直接访问 GitHub</a>
+            </div>
+        `;
+    }
+}
+
+// 页面加载完成后获取项目
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(fetchGitHubProjects, 500);
+});
+</script>
+
 </body>
 </html>
